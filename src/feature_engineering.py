@@ -1,5 +1,5 @@
 import pandas as pd
-import data_wrangling
+from src import data_wrangling
 
 def adding_features(dataFrame):
     #adding engineered features to the dataset
@@ -21,10 +21,12 @@ def save_engineered_dataFrame(data, save_path):
 
 def run_feature_engineering(cleaned_path):
     # load the data
+    print("---------- Feature Engineernig ----------")
     data = data_wrangling.load_data(cleaned_path) # taking load data method from data_wrangling module
     new_data = adding_features(data)
     # save the data
     save_engineered_dataFrame(new_data, cleaned_path)
+    print("---------- Feature Engineernig Done ----------")
 
 if __name__ == "__main__":
     raw_path = "data/raw/AmesHousing.csv" 

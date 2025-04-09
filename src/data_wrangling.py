@@ -36,11 +36,13 @@ def save_data(data, file_path):
     print(f"Data saved: {data.shape[0]} rows, {data.shape[1]} columns")
 
 def run_data_wrangling(raw_path= "data/raw/AmesHousing.csv", cleaned_path= "data/processed/Clean_AmesHousing.csv"):
+    print("------------ Data Wrangling Started ------------")
     df = load_data(raw_path)
     if df is not None:
         df = remove_null_columns(df)
         df = filling_missing_values(df)
         save_data(df, cleaned_path)
+    print("------------- Data Wrangling Finished ------------")
 
 if __name__ == "__main__":
     raw_path = "data/raw/AmesHousing.csv"
