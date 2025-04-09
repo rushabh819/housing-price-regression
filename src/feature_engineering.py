@@ -19,15 +19,15 @@ def save_engineered_dataFrame(data, save_path):
     print(f'saved the dataset with new features at {save_path}')
     print(f'dimention of dataframe after feature engineering, {data.shape[0]} rows and {data.shape[1]}')
 
-def run_feature_engineering(raw_path, clean_path):
+def run_feature_engineering(cleaned_path):
     # load the data
-    data_wrangling.run_data_wrangling(raw_path, clean_path)
-    data = data_wrangling.load_data(clean_path) # taking load data method from data_wrangling module
+    data = data_wrangling.load_data(cleaned_path) # taking load data method from data_wrangling module
     new_data = adding_features(data)
     # save the data
-    save_engineered_dataFrame(new_data, clean_path)
+    save_engineered_dataFrame(new_data, cleaned_path)
 
 if __name__ == "__main__":
     raw_path = "data/raw/AmesHousing.csv" 
-    clean_path = "data/processed/Clean_AmesHousing.csv"
-    run_feature_engineering(raw_path= raw_path, clean_path=clean_path)
+    cleaned_path = "data/processed/Clean_AmesHousing.csv"
+    data_wrangling.run_data_wrangling(raw_path, cleaned_path)
+    run_feature_engineering(raw_path= raw_path, cleaned_path=cleaned_path)
