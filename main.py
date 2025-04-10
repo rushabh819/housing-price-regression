@@ -1,7 +1,6 @@
-import src.data_wrangling as dw 
 import src.feature_engineering as fe
+import src.data_wrangling as dw
 import src.scaling_features as sf
-import pandas as pd
 
 def main():
     raw_path = "data/raw/AmesHousing.csv"

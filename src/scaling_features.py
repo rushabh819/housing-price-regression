@@ -2,10 +2,14 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import numpy as np
 
-def load_data(cleaned_file_path):
-    data = pd.read_csv(cleaned_file_path)
-    print(f"data loaded for scaling. {data.shape[0]} rows and {data.shape[1]} columns loaded")
-    return data
+def load_data(file_path):
+    try:
+        data = pd.read_csv(file_path)
+        print(f"Data loaded: {data.shape[0]} rows, {data.shape[1]} columns")
+        return data
+    except FileNotFoundError:
+        print(f'File now found on path: {file_path}')
+        return None
 
 def one_hot_encode_cat(X_dataFrame:pd.DataFrame):
     encode_cat = pd.get_dummies(X_dataFrame)
@@ -40,7 +44,7 @@ def save_data(dataFrame:pd.DataFrame, dest_file_path):
 
 def runScaling_features(origin_path, dest_path):
     # load dataset
-    dataFrame = load_data(cleaned_file_path= origin_path)
+    dataFrame = load_data(file_path= origin_path)
 
     # making X and y from the dataset; target column is "SalePrice"
     X = dataFrame.drop(columns="SalePrice")

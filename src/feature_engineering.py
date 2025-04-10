@@ -1,5 +1,13 @@
 import pandas as pd
-from src import data_wrangling
+
+def load_data(file_path):
+    try:
+        data = pd.read_csv(file_path)
+        print(f"Data loaded: {data.shape[0]} rows, {data.shape[1]} columns")
+        return data
+    except FileNotFoundError:
+        print(f'File now found on path: {file_path}')
+        return None
 
 def adding_features(dataFrame):
     #adding engineered features to the dataset
@@ -22,14 +30,14 @@ def save_engineered_dataFrame(data, save_path):
 def run_feature_engineering(origin_path, dest_path):
     # load the data
     print("---------- Feature Engineernig ----------")
-    data = data_wrangling.load_data(origin_path) # taking load data method from data_wrangling module
+    data = load_data(file_path= origin_path) # taking load data method from data_wrangling module
     new_data = adding_features(data)
     # save the data
     save_engineered_dataFrame(new_data, dest_path)
     print("---------- Feature Engineernig Done ----------")
 
 if __name__ == "__main__":
+    import data_wrangling
     raw_path = "data/raw/AmesHousing.csv" 
     cleaned_path = "data/processed/Clean_AmesHousing.csv"
-    data_wrangling.run_data_wrangling(raw_path, cleaned_path)
     run_feature_engineering(raw_path= raw_path, cleaned_path=cleaned_path)
