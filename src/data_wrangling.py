@@ -17,12 +17,6 @@ def remove_null_columns(data: pd.DataFrame, threshold = 0.9):
     print(f"Dropped {len(drop_null_index)} columns with missing values > {threshold*100}%")
     return data
 
-def handling_inf_values(data: pd.DataFrame):
-    # take the numeric data from dataframer
-    num_data = data.select_dtypes(include=['int64', 'float64']).copy()
-    num_data = num_data.replace([np.inf, -np.inf], np.nan)
-    return pd.concat([num_data, data.select_dtypes(exclude=['int64', 'float64'])])
-
 def filling_missing_values(data: pd.DataFrame):
     for col in data.columns:
         # check if the column has null records or not
@@ -48,8 +42,8 @@ def run_data_wrangling(raw_path= "data/raw/AmesHousing.csv", cleaned_path= "data
     df = load_data(raw_path)
     if df is not None:
         df = remove_null_columns(df)
-        df = handling_inf_values(df)
         df = filling_missing_values(df)
+        # print(df.isna().any()[df.isna().any() == True])
         save_data(df, cleaned_path)
     print("------------- Data Wrangling Finished ------------")
 

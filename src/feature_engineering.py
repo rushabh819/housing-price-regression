@@ -9,20 +9,20 @@ def load_data(file_path):
         print(f'File now found on path: {file_path}')
         return None
 
-def adding_features(dataFrame):
+def adding_features(dataFrame: pd.DataFrame):
     #adding engineered features to the dataset
     # 1. adding total square foot of house
     dataFrame['Total SF'] = dataFrame['1st Flr SF'] + dataFrame['2nd Flr SF'] + dataFrame['Total Bsmt SF']
     # 2. adding total number of bedrooms
     dataFrame['Total Bathrooms'] = dataFrame['Full Bath'] + 0.5 * dataFrame['Half Bath']
     # Bathroom per bedrooms
-    dataFrame['bath per bedroom'] = dataFrame['Total Bathrooms'] / dataFrame['Bedroom AbvGr']
+    dataFrame['bath per bedroom'] = dataFrame['Total Bathrooms'] / dataFrame['Bedroom AbvGr'].replace(0,1)
     # 4. House age
     dataFrame['House Age'] = dataFrame['Yr Sold'] - dataFrame['Year Built']
 
     print(f"Added new engineered features: total SF (total sq. feet), total bathrooms, bathroom per bedroom, house age")
     return dataFrame
-def save_engineered_dataFrame(data, save_path):
+def save_engineered_dataFrame(data: pd.DataFrame, save_path):
     data.to_csv(save_path, index=False)
     print(f'saved the dataset with new features at {save_path}')
     print(f'dimention of dataframe after feature engineering, {data.shape[0]} rows and {data.shape[1]}')
@@ -32,12 +32,12 @@ def run_feature_engineering(origin_path, dest_path):
     print("---------- Feature Engineernig ----------")
     data = load_data(file_path= origin_path) # taking load data method from data_wrangling module
     new_data = adding_features(data)
+    # print(new_data.isna().any().any())
     # save the data
     save_engineered_dataFrame(new_data, dest_path)
     print("---------- Feature Engineernig Done ----------")
 
 if __name__ == "__main__":
-    import data_wrangling
     raw_path = "data/raw/AmesHousing.csv" 
     cleaned_path = "data/processed/Clean_AmesHousing.csv"
-    run_feature_engineering(raw_path= raw_path, cleaned_path=cleaned_path)
+    run_feature_engineering(origin_path= cleaned_path, dest_path= cleaned_path)

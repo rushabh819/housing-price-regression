@@ -1,3 +1,6 @@
+import pandas as pd
+import numpy as np
+
 import src.feature_engineering as fe
 import src.data_wrangling as dw
 import src.scaling_features as sf
@@ -5,11 +8,13 @@ import src.scaling_features as sf
 def main():
     raw_path = "data/raw/AmesHousing.csv"
     cleaned_path = "data/processed/Clean_AmesHousing.csv"
-
-    fe.run_feature_engineering(origin_path= raw_path, dest_path= cleaned_path)    
-    dw.run_data_wrangling(raw_path= cleaned_path, cleaned_path= cleaned_path)
+    # Data Wrangling
+    dw.run_data_wrangling(raw_path= raw_path, cleaned_path= cleaned_path)
+    # Adding new Features with Feature Engineering
+    fe.run_feature_engineering(origin_path= cleaned_path, dest_path= cleaned_path)
+    # Scaling and encoding while converting bool into integer    
     sf.runScaling_features(origin_path= cleaned_path, dest_path= cleaned_path)
 
-    # data = pd.read_csv(cleaned_path)
-    # print(data.head())
+    df_final_cleaned = pd.read_csv(cleaned_path)
+
 main()

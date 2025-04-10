@@ -43,6 +43,7 @@ def save_data(dataFrame:pd.DataFrame, dest_file_path):
     print(f"Refined Dataframe saved to {dest_file_path}")
 
 def runScaling_features(origin_path, dest_path):
+    print("--------------- Scaling features started ---------------")
     # load dataset
     dataFrame = load_data(file_path= origin_path)
 
@@ -65,9 +66,11 @@ def runScaling_features(origin_path, dest_path):
     # df = X.merge(y)
     df = pd.concat([pd.DataFrame(X) , y], axis= 1)
 
-    save_data(df, dest_file_path= dest_path)
-    
+    # print(df.isna().any().any())
 
+    save_data(df, dest_file_path= dest_path)
+
+    print("--------------- Scaling features Finished ---------------")
 
 if __name__ == '__main__':
     from_path = "data/processed/Clean_AmesHousing.csv"
