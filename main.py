@@ -14,6 +14,7 @@ def main():
     fe.run_feature_engineering(origin_path= cleaned_path, dest_path= cleaned_path)
     # Scaling and encoding while converting bool into integer    
     sf.runScaling_features(origin_path= cleaned_path, dest_path= cleaned_path)
+    
 
     df_final_cleaned = pd.read_csv(cleaned_path)
 
