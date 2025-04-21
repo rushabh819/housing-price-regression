@@ -43,7 +43,6 @@ def run_data_wrangling(raw_path= "data/raw/AmesHousing.csv", cleaned_path= "data
     if df is not None:
         df = remove_null_columns(df)
         df = filling_missing_values(df)
-        # print(df.isna().any()[df.isna().any() == True])
         save_data(df, cleaned_path)
     print("------------- Data Wrangling Finished ------------")
 

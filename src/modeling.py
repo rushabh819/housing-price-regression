@@ -4,8 +4,6 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 
-# from sklearn.model_selection import train_test_split
-
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 
 import joblib
@@ -23,9 +21,6 @@ def create_model(X_path= "data/train/X_train.csv", y_path= "data/train/y_train.c
     y = import_data(y_path)
     y = y[y.columns.to_list()[0]]
 
-    # train test split
-    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.2, random_state= 42)
-
     # Define the parameter grid
     param_grid = {
         'n_estimators': [100, 200],            # Number of trees
@@ -36,8 +31,7 @@ def create_model(X_path= "data/train/X_train.csv", y_path= "data/train/y_train.c
         'bootstrap': [True]                    # Use bootstrapped samples
     }
 
-
-    # Preparing Models dictionary
+    # Preparing Model
     model_rf = RandomForestRegressor(random_state= 42)
 
     # set up the grid

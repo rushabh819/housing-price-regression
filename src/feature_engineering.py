@@ -30,10 +30,8 @@ def save_engineered_dataFrame(data: pd.DataFrame, save_path):
 def run_feature_engineering(origin_path, dest_path):
     # load the data
     print("---------- Feature Engineernig ----------")
-    data = load_data(file_path= origin_path) # taking load data method from data_wrangling module
+    data = load_data(file_path= origin_path) 
     new_data = adding_features(data)
-    # print(new_data.isna().any().any())
-    # save the data
     save_engineered_dataFrame(new_data, dest_path)
     print("---------- Feature Engineernig Done ----------")
 
